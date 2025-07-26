@@ -1,0 +1,45 @@
+<% layout("/layouts/boilerPlate") %>
+
+    <h3 class="pt-4 text-center">Login to Your Account</h3>
+
+    <div class="w-100 d-flex align-items-center justify-content-center">
+        <form method="post" action="/login"
+            class="my-3 p-sm-3 p-2 d-flex flex-column align-items-center justify-content-center border rounded needs-validation"
+            style="width: 420px;" novalidate>
+
+            <!-- Username  -->
+            <div class="w-100 mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" placeholder="@username" class="form-control" required>
+                <div class="invalid-feedback">Username can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- Email  -->
+            <!-- <div class="w-100 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" placeholder="example@gmail.com" class="form-control"
+                        required>
+                    <div class="invalid-feedback">Email can't be empty!</div>
+                    <div class="valid-feedback">Looks Good!</div>
+                </div> -->
+
+            <!-- Password  -->
+            <div class="w-100 mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" id="password" placeholder="******" class="form-control" required>
+                <div class="invalid-feedback">Password can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+
+            <!--Create btn  -->
+            <button class="btn btn-dark col-3 py-2 my-1 common-btn">Login</button>
+
+            <!-- Auth Card Footer  -->
+            <div class="my-2 w-100 text-left fs-6">
+                <a href="/signup">Create a new account</a>
+            </div>
+
+        </form>
+    </div>

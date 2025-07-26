@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerPlate") %>
+
+    <h3 class="pt-4 text-center">Create a New Listing</h3>
+
+    <div class="w-100 d-flex align-items-center justify-content-center">
+        <form method="post" action="/listings/new"
+            class="my-3 p-sm-4 p-3 d-flex flex-column align-items-center justify-content-center border rounded needs-validation"
+            style="width: 620px;" novalidate enctype="multipart/form-data">
+            <!-- title  -->
+            <div class="w-100 mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" id="title" placeholder="Enter the title" class="form-control" required>
+                <div class="invalid-feedback">Title can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- description -->
+            <div class="w-100 mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" placeholder="Writte your description" rows="5"
+                    maxlength="1000" class="form-control" required></textarea>
+                <div class="invalid-feedback">Description can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- image URL-->
+            <!-- <div class="w-100 mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="url" name="image" id="image" placeholder="Eg: https://..." class="form-control">
+                <div class="invalid-feedback">Invalid URL</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <p class="fw-medium fs-5">OR</p> -->
+
+            <!-- image File -->
+            <div class="w-100 mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+                <div class="invalid-feedback">Invalid Image</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- price  -->
+            <div class="w-100 mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="price" id="price" class="form-control" placeholder="Eg: ₹1200" required>
+                <div class="invalid-feedback">Invalid price!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- location  -->
+            <div class="w-100 mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="location" id="location" class="form-control"
+                    placeholder="Eg: Jaipur, Rajasthan" required>
+                <div class="invalid-feedback">Location can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- country  -->
+            <div class="w-100 mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="country" id="country" class="form-control" placeholder="Eg: India" required>
+                <div class="invalid-feedback">Country can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!--Create btn  -->
+            <button class="btn btn-dark col-3 py-2 my-3 common-btn">Create</button>
+        </form>
+    </div>

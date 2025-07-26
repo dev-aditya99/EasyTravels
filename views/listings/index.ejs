@@ -1,0 +1,45 @@
+<% layout("/layouts/boilerPlate") %>
+
+    <h3 class="py-3">All Listings</h3>
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 justify-content-center gap-2">
+        <% for (let listing of allListings) { %>
+            <a href="/listings/<%= listing._id %>" class="lising_link">
+                <div class="card col border-0 mb-4 rounded-5 position-relative">
+
+                    <!-- listing image  -->
+                    <img src="<%= listing.image.url %>" class="card-img-top rounded-5" alt="listing_image"
+                        style="height: 18rem;">
+
+                    <!-- owner username  -->
+                    <span class="ms-4 mt-3 p-2 badge text-bg-dark listing-badge">
+                        @<%= listing.owner.username %>
+                    </span>
+
+                    <!-- card body  -->
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= listing.title %>
+                        </h5>
+                        <p class="card-text h-5 text-nowrap">
+                            <%= listing.description.slice(0,31) %>...
+                        </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item underline">
+                            ₹<%= listing?.price?.toLocaleString("en-in") %> for 1 night
+                        </li>
+                        <li class="list-group-item">
+                            <%= listing.location %>
+                        </li>
+                        <li class="list-group-item">
+                            <%= listing.country %>
+                        </li>
+                    </ul>
+                    <!-- <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div> -->
+                </div>
+            </a>
+            <% } %>
+    </div>

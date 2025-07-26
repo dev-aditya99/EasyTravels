@@ -1,0 +1,173 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+
+.navbar {
+    min-height: 5rem;
+    background: #fff;
+}
+
+.fa-plane-departure {
+    color: #ff385c;
+}
+
+.nav-link {
+    color: #222 !important;
+}
+
+.lising_link {
+    text-decoration: none !important;
+}
+
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.card-title {
+    font-size: 1.1rem;
+}
+
+.card-img-top:hover {
+    opacity: 0.8 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* Footer  */
+.f-info {
+    padding: 1rem;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-socials,
+.f-info-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.f-info-socials {
+    font-size: 1.2rem;
+}
+
+/* show page */
+.show-img {
+    height: 40vh;
+    cursor: pointer;
+    border-radius: 25px !important;
+}
+
+
+/* ratings  */
+.fa-star {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.fa-star:hover {
+    scale: 1.1;
+}
+
+@keyframes animateRatingStars {
+    0% {
+        transform: scale(1) rotateY(0deg) translateX(0px);
+        margin-right: 0;
+    }
+
+    50% {
+        transform: scale(1.5) rotateY(180deg) translateX(5px);
+    }
+
+    100% {
+        transform: scale(1.2) rotateY(0deg) translateX(-5px);
+    }
+}
+
+.text-warning {
+    scale: 1.1;
+    margin-right: 0.1rem;
+    animation: animateRatingStars 0.5s ease-in-out;
+}
+
+
+/* common  */
+.underline {
+    text-decoration: underline !important;
+}
+
+.common-btn {
+    background: #ff385c !important;
+    font-weight: 600 !important;
+    border: 1px solid #ff385c !important;
+}
+
+.common-btn:hover {
+    background: #fff !important;
+    color: #ff385c !important;
+}
+
+.z-index-high {
+    z-index: 999999999 !important;
+}
+
+.animate-alert-slide {
+    animation: animateAlerts 0.2s 1 ease-in-out;
+}
+
+.listing-badge {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    margin-right: 5px;
+    background: #ff385c;
+    box-shadow: 0 0 5px #555;
+}
+
+/* Map  */
+#map {
+    width: 100%;
+    height: 60vh;
+}
+
+/* Animations  */
+@keyframes animateAlerts {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}

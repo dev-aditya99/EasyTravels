@@ -1,0 +1,82 @@
+<% layout("/layouts/boilerPlate") %>
+
+
+    <h3 class="pt-4 text-center">Edit : <%= listing.title %>
+    </h3>
+
+    <!-- edit form  -->
+    <div class="w-100 d-flex align-items-center justify-content-center">
+        <form method="post" action="/listings/<%= listing._id %>/edit?_method=PUT"
+            class="my-3 p-sm-4 p-3 d-flex flex-column align-items-center justify-content-center border rounded needs-validation"
+            novalidate style="width: 620px;" enctype="multipart/form-data">
+            <!-- title  -->
+            <div class="w-100 mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" id="title" placeholder="Enter the title" class="form-control"
+                    value="<%= listing.title %>" required>
+
+                <div class="invalid-feedback">Title can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- description -->
+            <div class="w-100 mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" id="description" placeholder="Writte your description" rows="5"
+                    maxlength="1000" class="form-control" required><%= listing.description %></textarea>
+
+                <div class="invalid-feedback">Description can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- Listing Image Preview  -->
+            <div class="w-100 mb-3">
+                <label for="image" class="form-label">Image Preview</label>
+                <img src="<%= originalImageURL %>" alt="listing_image_preview" class="w-50 rounded-4 d-block">
+            </div>
+
+            <!-- Uplpoad new image -->
+            <div class="w-100 mb-3">
+                <label for="image" class="form-label">Upload New Image</label>
+                <input type="file" name="image" id="image" class="form-control">
+
+                <div class="invalid-feedback">Invalid File</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- price  -->
+            <div class="w-100 mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="price" id="price" class="form-control" placeholder="Eg: ₹1200"
+                    value="<%= listing.price %>" required>
+
+                <div class="invalid-feedback">Invalid price!</div>
+                <div class="valid-feedback">Looks Good!</div>
+
+            </div>
+
+            <!-- location  -->
+            <div class="w-100 mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" name="location" id="location" class="form-control"
+                    placeholder="Eg: Jaipur, Rajasthan" value="<%= listing.location %>" required>
+
+                <div class="invalid-feedback">Location can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- country  -->
+            <div class="w-100 mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="country" id="country" class="form-control" placeholder="Eg: India"
+                    value="<%= listing.country %>" required>
+
+                <div class="invalid-feedback">Country can't be empty!</div>
+                <div class="valid-feedback">Looks Good!</div>
+
+            </div>
+
+            <!-- Save Changes btn  -->
+            <button class="btn btn-dark col-4 py-2 my-3 common-btn">Save Changes</button>
+        </form>
+    </div>

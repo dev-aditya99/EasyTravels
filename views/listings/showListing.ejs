@@ -1,0 +1,192 @@
+<% layout("/layouts/boilerPlate") %>
+
+    <script>
+        let mapToken = "<%= process.env.MAPBOX_TOKEN%>"
+
+        let listing = <%- JSON.stringify(listing) %>
+    </script>
+
+    <h3 class="py-3">
+        <%= listing.title%>
+    </h3>
+
+    <div class="container">
+        <img src="<%= listing.image.url %>" alt="listing image" class="card-img-top show-img">
+        <div class="card my-4 p-4">
+            <!-- Listing owner  -->
+            <p>
+                Owned by <i class="fw-bold">@<%= listing.owner.username %></i>
+            </p>
+
+            <!-- description  -->
+            <p>
+                <%= listing.description%>
+            </p>
+            <ul class="list-group list-group-flush mb-3">
+                <% if(listing?.reviews.length>0) {%>
+
+                    <!-- rating  -->
+                    <li class="list-group-item" id="show-rating">
+                        <% let avgRating=0 %>
+                            <% for(let i=0; i <listing.reviews.length;i++){ %>
+                                <% avgRating +=listing?.reviews[i]?.rating %>
+                                    <% } %>
+                                        <i class="fa-solid fa-star text-warning fs-5"></i>
+                                        <%= (avgRating/listing.reviews.length).toLocaleString().slice(0,3) %> /
+                                            <%= listing.reviews.length %>
+
+                    </li>
+                    <% } %>
+
+                        <!-- price  -->
+                        <li class=" list-group-item underline">
+                            ₹<%= listing?.price?.toLocaleString("en-in") %> for 1 night
+                        </li>
+
+                        <!-- location  -->
+                        <li class="list-group-item">
+                            <%= listing.location %>
+                        </li>
+
+                        <!-- country  -->
+                        <li class="list-group-item">
+                            <%= listing.country %>
+                        </li>
+            </ul>
+
+            <!-- actions  -->
+            <% if(curUser && curUser._id.equals(listing.owner._id)){ %>
+                <div class="d-flex flex-row gap-2">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark ">Edit</a>
+
+                    <form method="post" action="/listings/<%= listing._id %>/delete?_method=DELETE">
+                        <button class="btn btn-dark common-btn">Delete</button>
+                    </form>
+                </div>
+                <hr>
+                <% } %>
+
+
+                    <!-- reviews  -->
+                    <div class="my-3">
+                        <h4>Leave a Review</h4>
+                        <form method="post" action="/listings/<%= listing._id %>/reviews" class="needs-validation"
+                            novalidate>
+                            <!-- ratings  -->
+                            <div class="my-3">
+                                <% let rating=0 %>
+                                    <label for="rating" class="form-label d-flex align-items-center py-2 gap-1">
+                                        <% for(let i=1; i <=5;i++){ %>
+                                            <i class="fa-solid fa-star text-body-tertiary fs-3 rating-star"
+                                                onclick="addRating('<%=i%>')"></i>
+                                            <% } %>
+                                    </label>
+                                    <input type="number" name="rating" id="rating" hidden required class="form-control">
+
+                                    <!-- rating validation msg  -->
+                                    <div class="invalid-feedback fw-medium">Please, first give a rating!</div>
+                            </div>
+
+                            <!-- comments  -->
+                            <div class="d-flex flex-column">
+                                <label for="comments" class="py-2 form-label">Comments</label>
+                                <textarea name="comments" id="comments" placeholder="Write your comment" rows="4"
+                                    class="p-2 form-control" required></textarea>
+                                <div class="invalid-feedback fw-medium">Comments can't be empty!</div>
+                                <div class="valid-feedback fw-medium">Looks Good!</div>
+                            </div>
+
+                            <button class="btn btn-dark common-btn mt-3">Submit</button>
+                        </form>
+                    </div>
+        </div>
+
+        <div class="card mb-3 p-3">
+            <h3>Where You'll be</h3>
+            <div id="map"></div>
+        </div>
+
+        <!-- all reviews  -->
+        <div class="card mb-3">
+            <!-- All reviews heading  -->
+            <h4 class="p-3">All Reviews</h4>
+
+            <!-- All reviews ul  -->
+            <% if(listing?.reviews.length>0) {%>
+                <!-- Review Items  -->
+                <ul class="list-group list-group-flush mb-3">
+                    <% for(let i=0;i<listing?.reviews?.length;i++){ %>
+                        <!-- Review Item  -->
+                        <li class="list-group-item py-3">
+                            <!-- review author username  -->
+                            <div class="fw-bold">
+                                @<%= listing?.reviews[i].author.username %>
+                            </div>
+
+                            <!-- created/modified time  -->
+                            <i class="d-block fs-6 fw-lighter pb-3">
+                                <%= listing?.reviews[i].updatedAt.toLocaleString() %>
+                            </i>
+
+                            <!-- review stars  -->
+                            <% for(let j=1; j <=5;j++){ %>
+                                <% if(j<=listing?.reviews[i].rating) {%>
+                                    <i class="fa-solid fa-star text-warning fs-5"></i>
+                                    <% } else{%>
+                                        <i class="fa-solid fa-star text-body-tertiary fs-5"></i>
+                                        <% } %>
+                                            <% } %>
+
+                                                <!-- Comments  -->
+                                                <div class="m-4 ps-3 py-2 border-start border-black">
+                                                    <%= listing?.reviews[i].comments %>
+                                                </div>
+
+
+                                                <!-- Delete Btn  -->
+                                                <% if(curUser && curUser._id.equals(listing.reviews[i].author._id)){ %>
+                                                    <form method="post"
+                                                        action="/listings/<%= listing._id %>/reviews/<%= listing?.reviews[i]._id %>?_method=DELETE"
+                                                        class="d-flex justify-content-end">
+
+                                                        <button class="fa-solid fa-trash btn btn-light"></button>
+                                                    </form>
+                                                    <% } %>
+                        </li>
+                        <% } %>
+                </ul>
+                <% }else{ %>
+                    <hr>
+                    <p class="text-center py-3 fs-5">No reviews</p>
+                    <% } %>
+
+        </div>
+
+    </div>
+    <script>
+            document.title = "WonderList : <%= listing.title%>"
+
+        let ratingStars = document.querySelectorAll(".rating-star");
+        let ratingInp = document.querySelector("#rating");
+        let showRating = document.querySelector("#show-rating");
+
+        const addRating = (rating) => {
+            for (let i = 0; i < 5; i++) {
+                ratingStars[i].classList.remove("text-warning")
+                ratingStars[i].classList.add("text-body-tertiary")
+
+            }
+
+            for (let i = 0; i < rating; i++) {
+                ratingStars[i].classList.remove("text-body-tertiary")
+                ratingStars[i].classList.add("text-warning")
+            }
+
+            ratingInp.value = rating;
+        }
+
+
+
+    </script>
+
+    <script src="/js/map.js"></script>
