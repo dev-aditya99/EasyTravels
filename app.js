@@ -19,6 +19,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require("passport-local")
 const User = require('./models/user.js');
+const wrapAsync = require('./utils/wrapAsync.js');
 
 const app = express();
 const PORT = 8080;
@@ -112,6 +113,22 @@ app.use("/listings", listigRouter)
 app.use("/listings/:id/reviews", reviewsRouter)
 // User
 app.use("/", userRouter)
+
+// Privacy Policy Route 
+app.get("/privacy", wrapAsync(async(req, res) => {
+    res.render("others/privacy.ejs")
+}))
+
+// Terms & Conditions Route 
+app.get("/terms", wrapAsync(async(req, res) => {
+    res.render("others/terms.ejs")
+}))
+
+// Developer Route 
+app.get("/developer", wrapAsync(async(req, res) => {
+    res.render("others/developer.ejs")
+}))
+
 
 
 

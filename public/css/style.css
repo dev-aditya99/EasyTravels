@@ -52,7 +52,7 @@ body {
 /* Footer  */
 .f-info {
     padding: 1rem;
-    background: #f2f2f2;
+    background: #fffafb;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,6 +98,24 @@ body {
 
 .fa-star:hover {
     scale: 1.1;
+}
+
+/* Social Media Icons  */
+.f-info-socials>.fa-brands{
+    color: #d50e33;
+}
+
+/* EasyTravels Your Home */
+.easy-travels-your-home{
+    background: #ebebeb !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border-radius: 25px;
+    transition: all 0.2s ease-in-out;
+}
+
+.easy-travels-your-home:hover{
+    background: #ebebeba6 !important;
 }
 
 @keyframes animateRatingStars {
