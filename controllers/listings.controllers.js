@@ -2,6 +2,8 @@ const Listing = require("../models/listing");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAPBOX_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
+const { storage } = require('../cloudConfig.js');
+const {v2 : cloudinary} = require("cloudinary")
 
 
 // Index Route
@@ -100,7 +102,8 @@ module.exports.updateListing = async (req, res) => {
 module.exports.destroyListing = async (req, res) => {
     let { id } = req.params;
 
-    await Listing.findByIdAndDelete(id);
+   let listing = await Listing.findByIdAndDelete(id);
+   await cloudinary.uploader.destroy(listing.image.filename);
     req.flash("success", `Listing with Id : ${id} is Deleted!`)
     res.redirect("/listings/")
 }
